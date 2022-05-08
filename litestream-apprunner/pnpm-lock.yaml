@@ -26,7 +26,7 @@ specifiers:
   rxjs: 7.5.5
   source-map-support: 0.5.21
   supertest: 6.2.3
-  ts-jest: 28.0.1
+  ts-jest: 28.0.2
   ts-loader: 9.3.0
   ts-node: 10.7.0
   tsconfig-paths: 4.0.0
@@ -60,7 +60,7 @@ devDependencies:
   prisma: 3.13.0
   source-map-support: 0.5.21
   supertest: 6.2.3
-  ts-jest: 28.0.1_4db907953e67367985ae85b48dfb7df7
+  ts-jest: 28.0.2_4db907953e67367985ae85b48dfb7df7
   ts-loader: 9.3.0_typescript@4.6.4
   ts-node: 10.7.0_fd4b5ff48b408bf425abfec4a641da13
   tsconfig-paths: 4.0.0
@@ -4714,8 +4714,8 @@ packages:
     hasBin: true
     dev: true
 
-  /ts-jest/28.0.1_4db907953e67367985ae85b48dfb7df7:
-    resolution: {integrity: sha512-PbkbitaT/9ZYAqqzk3UYTvCq080Seo46T3m/AdwcZ0D8WH2uBhG6PvA8oOAWsZIknzPQU66fYobvFCL8IqIhmg==}
+  /ts-jest/28.0.2_4db907953e67367985ae85b48dfb7df7:
+    resolution: {integrity: sha512-IOZMb3D0gx6IHO9ywPgiQxJ3Zl4ECylEFwoVpENB55aTn5sdO0Ptyx/7noNBxAaUff708RqQL4XBNxxOVjY0vQ==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
