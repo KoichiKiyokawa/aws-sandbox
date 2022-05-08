@@ -1,0 +1,4 @@
+dbs:
+  - path: ${DATABASE_URL}
+    replicas:
+      - url: ${REPLICA_URL}
