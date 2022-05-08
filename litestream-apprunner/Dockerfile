@@ -10,4 +10,4 @@ RUN dpkg -i litestream-v0.3.8-linux-arm64.deb && \
   pnpm exec prisma generate && \
   pnpm run build
 COPY litestream.yml /etc/litestream.yml
-CMD ["litestream", "replicate"]
+CMD ["litestream", "replicate", "-exec", "node dist/main"]
