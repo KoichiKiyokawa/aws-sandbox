@@ -1,0 +1,1 @@
+docker build --platform amd64 -t 877131159332.dkr.ecr.ap-northeast-1.amazonaws.com/litestream:latest .   

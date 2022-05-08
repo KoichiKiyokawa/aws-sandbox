@@ -1,8 +1,8 @@
 FROM node:16.15.0
 COPY . .
-ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.8/litestream-v0.3.8-linux-arm64.deb .
-RUN dpkg -i litestream-v0.3.8-linux-arm64.deb && \
-  rm litestream-v0.3.8-linux-arm64.deb && \
+ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.8/litestream-v0.3.8-linux-amd64.deb .
+RUN dpkg -i litestream-v0.3.8-linux-amd64.deb && \
+  rm litestream-v0.3.8-linux-amd64.deb && \
   apt-get update && \
   apt-get install -y sqlite && \
   corepack enable pnpm && \
