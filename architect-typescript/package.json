@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@architect/architect": "10.3.3",
+    "@architect/plugin-typescript": "0.1.0",
+    "source-map-support": "0.5.21"
+  },
+  "packageManager": "pnpm@7.0.1"
+}
