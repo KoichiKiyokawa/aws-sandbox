@@ -1,5 +1,5 @@
 // learn more about HTTP functions here: https://arc.codes/http
-export async function http(req: Request) {
+export async function handler(req: Request) {
   return {
     statusCode: 200,
     headers: {
