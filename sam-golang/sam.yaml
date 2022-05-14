@@ -45,6 +45,8 @@ Resources:
       KeySchema: 
         - AttributeName: ID
           KeyType: HASH
+        - AttributeName: CreatedAt
+          KeyType: RANGE
       ProvisionedThroughput: 
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
