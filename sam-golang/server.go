@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"sam-golang/graph"
@@ -11,24 +10,26 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/awslabs/aws-lambda-go-api-proxy/httpadapter"
+	"github.com/guregu/dynamo"
 )
 
-const defaultPort = "3000"
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = defaultPort
+	db := dynamo.New(session.Must(session.NewSession()), aws.NewConfig().WithRegion("ap-northeast-1"))
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{DB: db}}))
+
+	path := "/query"
+	envPrefix := os.Getenv("ENV_PREFIX")
+	if envPrefix != "" {
+		path = "/" + envPrefix + path
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
-
-	http.Handle("/", playground.Handler("GraphQL playground", fmt.Sprintf("/%s/query", os.Getenv("ENV_PREFIX"))))
+	http.Handle("/", playground.Handler("GraphQL playground", path))
 	http.Handle("/query", srv)
 
 	fmt.Println(http.DefaultServeMux)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	lambda.Start(httpadapter.New(http.DefaultServeMux).ProxyWithContext)
 }

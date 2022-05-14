@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"sam-golang/graph/generated"
 	"sam-golang/graph/model"
+
+	"github.com/vektah/gqlparser/v2/gqlerror"
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
@@ -15,9 +17,13 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 }
 
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	return []*model.Todo{
-		{ID: "1", Text: "todo1", Done: false, User: &model.User{ID: "1", Name: "user1"}},
-	}, nil
+	var todos []*model.Todo
+	err := r.DB.Table("Todo").Scan().All(&todos)
+	if err != nil {
+		return nil, gqlerror.Errorf("failed to fetch todos")
+	}
+
+	return todos, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
