@@ -24,7 +24,7 @@ func main() {
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	http.Handle("/", playground.Handler("GraphQL playground", fmt.Sprintf("/%s/query", os.Getenv("ENV_PREFIX"))))
 	http.Handle("/query", srv)
 
 	fmt.Println(http.DefaultServeMux)
