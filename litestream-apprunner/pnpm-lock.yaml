@@ -10,7 +10,7 @@ specifiers:
   '@prisma/client': 3.14.0
   '@tsconfig/strictest': 1.0.1
   '@types/express': 4.17.13
-  '@types/jest': 27.5.1
+  '@types/jest': 28.1.0
   '@types/node': 17.0.36
   '@types/supertest': 2.0.12
   '@typescript-eslint/eslint-plugin': 5.26.0
@@ -47,7 +47,7 @@ devDependencies:
   '@nestjs/testing': 8.4.5_af31697f166e96f0aa85c9782d92c104
   '@tsconfig/strictest': 1.0.1
   '@types/express': 4.17.13
-  '@types/jest': 27.5.1
+  '@types/jest': 28.1.0
   '@types/node': 17.0.36
   '@types/supertest': 2.0.12
   '@typescript-eslint/eslint-plugin': 5.26.0_3e687f93547efbf7d61b629ca4d69a5c
@@ -60,7 +60,7 @@ devDependencies:
   prisma: 3.14.0
   source-map-support: 0.5.21
   supertest: 6.2.3
-  ts-jest: 28.0.3_fc81a27b80351b0ea93cc89cb3c5aa0b
+  ts-jest: 28.0.3_c7a2878ab563eaa9a59ac94cd77db071
   ts-loader: 9.3.0_typescript@4.7.2
   ts-node: 10.8.0_b78c5ba09bb96cd9873b65821ae0411c
   tsconfig-paths: 4.0.0
@@ -1131,8 +1131,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/27.5.1:
-    resolution: {integrity: sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ==}
+  /@types/jest/28.1.0:
+    resolution: {integrity: sha512-ITfF6JJIl9zbEi2k6NmhNE/BiDqfsI/ceqfvdaWaPbcrCpYyyRq4KtDQIWh6vQUru6SqwppODiom/Zhid+np6A==}
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
@@ -1913,7 +1913,7 @@ packages:
       color-name: 1.1.4
 
   /color-name/1.1.3:
-    resolution: {integrity: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=}
+    resolution: {integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==}
     dev: true
 
   /color-name/1.1.4:
@@ -2713,7 +2713,7 @@ packages:
     dev: true
 
   /has-flag/3.0.0:
-    resolution: {integrity: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=}
+    resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
     dev: true
 
@@ -4543,7 +4543,7 @@ packages:
     hasBin: true
     dev: true
 
-  /ts-jest/28.0.3_fc81a27b80351b0ea93cc89cb3c5aa0b:
+  /ts-jest/28.0.3_c7a2878ab563eaa9a59ac94cd77db071:
     resolution: {integrity: sha512-HzgbEDQ2KgVtDmpXToqAcKTyGHdHsG23i/iUjfxji92G5eT09S1m9UHZd7csF0Bfgh9txM4JzwHnv7r1waFPlw==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
@@ -4564,7 +4564,7 @@ packages:
       esbuild:
         optional: true
     dependencies:
-      '@types/jest': 27.5.1
+      '@types/jest': 28.1.0
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 28.1.0_ebe799d22ab43620bf6b34b78ddce234
