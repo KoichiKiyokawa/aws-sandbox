@@ -37,6 +37,8 @@ github.com/aws/aws-sdk-go v1.44.27 h1:8CMspeZSrewnbvAwgl8qo5R7orDLwQnTGBf/OKPiHx
 github.com/aws/aws-sdk-go v1.44.27/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
 github.com/aws/aws-sdk-go v1.44.29 h1:53YWlelsMiYmGxuTRpAq7Xp+pE+0esAVqNFiNyekU+A=
 github.com/aws/aws-sdk-go v1.44.29/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
+github.com/aws/aws-sdk-go v1.44.32 h1:x5hBtpY/02sgRL158zzTclcCLwh3dx3YlSl1rAH4Op0=
+github.com/aws/aws-sdk-go v1.44.32/go.mod h1:y4AeaBuwd2Lk+GepC1E9v0qOiTws0MIWAX4oIKwKHZo=
 github.com/awslabs/aws-lambda-go-api-proxy v0.13.2 h1:Sy8mCKR8GKRRQBU5jt5p6KHD9JPltl5ClfJMwhx35BI=
 github.com/awslabs/aws-lambda-go-api-proxy v0.13.2/go.mod h1:+c4BkN5CUEoXrdrOmBruhtRIcmwXWQBu6vz6xCFAvdA=
 github.com/aymerick/douceur v0.2.0/go.mod h1:wlT5vV2O3h55X9m7iVYN0TBM0NH/MmbLnd30/FjWUq4=
