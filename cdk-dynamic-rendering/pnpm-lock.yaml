@@ -5,15 +5,15 @@ specifiers:
   '@types/node': 17.0.42
   aws-cdk: 2.27.0
   aws-cdk-lib: 2.27.0
-  constructs: 10.1.35
+  constructs: 10.1.36
   jest: 28.1.1
   ts-jest: 28.0.4
   ts-node: 10.8.1
   typescript: 4.7.3
 
 dependencies:
-  aws-cdk-lib: 2.27.0_constructs@10.1.35
-  constructs: 10.1.35
+  aws-cdk-lib: 2.27.0_constructs@10.1.36
+  constructs: 10.1.36
 
 devDependencies:
   '@types/jest': 28.1.1
@@ -814,7 +814,7 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: false
 
-  /aws-cdk-lib/2.27.0_constructs@10.1.35:
+  /aws-cdk-lib/2.27.0_constructs@10.1.36:
     resolution: {integrity: sha512-CsTy/+RIBMvP9LlZjkQakkKPpwU50+HAMCMaGOcyIHADDQdXobGcZXTO+Tq00sH2DoQjPV1ZhhBim5z3k/2KXw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -822,7 +822,7 @@ packages:
     dependencies:
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.1.35
+      constructs: 10.1.36
       fs-extra: 9.1.0
       ignore: 5.2.0
       jsonschema: 1.4.1
@@ -1062,8 +1062,8 @@ packages:
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  /constructs/10.1.35:
-    resolution: {integrity: sha512-ak/ml4xdnsLiaKAUFnYQiwGMA1yOgdcnNr7KlfhAbhM9Sq1rvb/TPzF6Jdgi9wivjJVtnUuNRgbZ7+JJJrK2cw==}
+  /constructs/10.1.36:
+    resolution: {integrity: sha512-6yJOPlPJ5/LHWyFJ7h/26CAiDhblqaOGOSsSqvZR6jzjc1RWY+J6I7I/vzyM1iTrP7ZlWWHuC5NBEwQOp3X87w==}
     engines: {node: '>= 14.17.0'}
     dev: false
 
