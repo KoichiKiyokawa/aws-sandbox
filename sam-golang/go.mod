@@ -3,12 +3,12 @@ module sam-golang
 go 1.18
 
 require (
-	github.com/99designs/gqlgen v0.17.9
+	github.com/99designs/gqlgen v0.17.10
 	github.com/aws/aws-lambda-go v1.32.0
-	github.com/aws/aws-sdk-go v1.44.32
+	github.com/aws/aws-sdk-go v1.44.37
 	github.com/awslabs/aws-lambda-go-api-proxy v0.13.2
 	github.com/guregu/dynamo v1.15.1
-	github.com/vektah/gqlparser/v2 v2.4.4
+	github.com/vektah/gqlparser/v2 v2.4.5
 )
 
 require (
