@@ -4,8 +4,8 @@ specifiers:
   '@types/jest': ^28.0.0
   '@types/node': 18.0.0
   '@types/prettier': 2.6.3
-  aws-cdk: 2.29.1
-  aws-cdk-lib: 2.29.1
+  aws-cdk: 2.30.0
+  aws-cdk-lib: 2.30.0
   constructs: ^10.1.10
   jest: ^28.0.0
   source-map-support: ^0.5.21
@@ -14,7 +14,7 @@ specifiers:
   typescript: ~4.7.0
 
 dependencies:
-  aws-cdk-lib: 2.29.1_constructs@10.1.10
+  aws-cdk-lib: 2.30.0_constructs@10.1.10
   constructs: 10.1.10
   source-map-support: 0.5.21
 
@@ -22,7 +22,7 @@ devDependencies:
   '@types/jest': 28.1.0
   '@types/node': 18.0.0
   '@types/prettier': 2.6.3
-  aws-cdk: 2.29.1
+  aws-cdk: 2.30.0
   jest: 28.1.0_179f690685afd94b914f67917f61dfa1
   ts-jest: 28.0.5_jest@28.1.0+typescript@4.7.2
   ts-node: 10.7.0_a2c5b1f62bc320430dd6933cb8d7413c
@@ -806,8 +806,8 @@ packages:
       sprintf-js: 1.0.3
     dev: true
 
-  /aws-cdk-lib/2.29.1_constructs@10.1.10:
-    resolution: {integrity: sha512-tmWhsmSvNrJD9/SFAD0The7hON3VYUcFchKnjPg4vwvY89XzZv76IB24KLy3XoXF33WYvCUzDQPO/bCZQBF4LA==}
+  /aws-cdk-lib/2.30.0_constructs@10.1.10:
+    resolution: {integrity: sha512-e9KKwRF4vPzPpOXPq8dtzUdn6j2tmTrrSZmQu2tOiZni0eB1vhiOVwaxc/8aEUrz8wUZ8t2gEitYdJmtm/GWhQ==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -825,8 +825,8 @@ packages:
       - semver
       - yaml
 
-  /aws-cdk/2.29.1:
-    resolution: {integrity: sha512-JRuxHfMPR7kpGrk5fA1NgBmTLPpVa2gIRf5Pz+T9XaHM0lB8QLOkjXD6O5UJvgQtx/rwYAyD8b+n3b1rKaEGRQ==}
+  /aws-cdk/2.30.0:
+    resolution: {integrity: sha512-kt2Xm7UvLhlqhLsPrzOVjr10moRfMiIsbmY7TteE4YBntG7zZD3Ec2EBSWjOhszNEDLv2MYQYFOpGDKkjy45MA==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
     optionalDependencies:
