@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/99designs/gqlgen v0.17.12
 	github.com/aws/aws-lambda-go v1.32.1
-	github.com/aws/aws-sdk-go v1.44.49
+	github.com/aws/aws-sdk-go v1.44.51
 	github.com/awslabs/aws-lambda-go-api-proxy v0.13.3
 	github.com/guregu/dynamo v1.15.1
 	github.com/vektah/gqlparser/v2 v2.4.6

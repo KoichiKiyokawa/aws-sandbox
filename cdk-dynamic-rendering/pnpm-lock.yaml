@@ -3,8 +3,8 @@ lockfileVersion: 5.3
 specifiers:
   '@types/jest': 28.1.4
   '@types/node': 18.0.3
-  aws-cdk: 2.31.0
-  aws-cdk-lib: 2.31.0
+  aws-cdk: 2.31.1
+  aws-cdk-lib: 2.31.1
   constructs: 10.1.43
   jest: 28.1.2
   ts-jest: 28.0.5
@@ -12,13 +12,13 @@ specifiers:
   typescript: 4.7.4
 
 dependencies:
-  aws-cdk-lib: 2.31.0_constructs@10.1.43
+  aws-cdk-lib: 2.31.1_constructs@10.1.43
   constructs: 10.1.43
 
 devDependencies:
   '@types/jest': 28.1.4
   '@types/node': 18.0.3
-  aws-cdk: 2.31.0
+  aws-cdk: 2.31.1
   jest: 28.1.2_250642e41d506bccecc9f35ad915bcb5
   ts-jest: 28.0.5_jest@28.1.2+typescript@4.7.4
   ts-node: 10.8.2_2dd5d46eecda2aef953638919121af58
@@ -805,8 +805,8 @@ packages:
       sprintf-js: 1.0.3
     dev: true
 
-  /aws-cdk-lib/2.31.0_constructs@10.1.43:
-    resolution: {integrity: sha512-6GvBmHtUx74uffl6kzvTL1bWN2/qPj4oHQj12gtqPifFBbNNrYGjLEeBY6DuidLhg96OoRoFc3lyJoiB/p7BEw==}
+  /aws-cdk-lib/2.31.1_constructs@10.1.43:
+    resolution: {integrity: sha512-1IFgMxr1PpX90KFzTRZKVwfY+qP/UzLsrNgfylvqveOKy3R6qtGAhAx186+Zy2nx+wYoy+hVz89CZSItGDapMA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -824,8 +824,8 @@ packages:
       - semver
       - yaml
 
-  /aws-cdk/2.31.0:
-    resolution: {integrity: sha512-vA6ErwhUX7IuIvYkmzlEH8XUN6Ygali/MlEdRwvcD2Dlg1D1WF2zMxGPN8H0sY69S6N2lnM8VmiNiSrh/fpShg==}
+  /aws-cdk/2.31.1:
+    resolution: {integrity: sha512-iET6uQkkllhidC7EsmC8+q8iHGe8o/JCZiEWAdsU4WvZRFuh0ckktQphYf9l/gKgO9x4hthvcEWbMlnjrmzXsw==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
     optionalDependencies:
