@@ -1,29 +1,29 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@architect/architect': 10.3.4
+  '@architect/architect': 10.4.1
   '@architect/plugin-typescript': 0.1.0
   source-map-support: 0.5.21
 
 devDependencies:
-  '@architect/architect': 10.3.4
+  '@architect/architect': 10.4.1
   '@architect/plugin-typescript': 0.1.0
   source-map-support: 0.5.21
 
 packages:
 
-  /@architect/architect/10.3.4:
-    resolution: {integrity: sha512-QaGL56CV+skvQUvuZq4wCIIEywy3cJR4EqADcn4pPQWGITzxZwCgB1kgfctchbGvQaSqB1hedE9AAna+OpTD9g==}
+  /@architect/architect/10.4.1:
+    resolution: {integrity: sha512-0Iv/rYPM4dZnL7oD5H87rPR3mGBCn2gdmPYyLWU6j2cljFTxin1KBtGhHqcsu4r9gcgcyQpGHLtgyDczjveQPw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/create': 4.0.4
-      '@architect/deploy': 4.1.3
-      '@architect/destroy': 3.0.3
-      '@architect/env': 3.0.3
-      '@architect/hydrate': 3.0.3
-      '@architect/logs': 4.0.2
-      '@architect/sandbox': 5.3.1
+      '@architect/create': 4.0.5
+      '@architect/deploy': 4.2.1
+      '@architect/destroy': 3.0.4
+      '@architect/env': 3.0.4
+      '@architect/hydrate': 3.0.4
+      '@architect/logs': 4.0.3
+      '@architect/sandbox': 5.3.2
       aws-sdk: 2.1001.0
       chalk: 4.1.2
       update-notifier: 5.1.0
@@ -39,32 +39,32 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /@architect/create/4.0.4:
-    resolution: {integrity: sha512-n+ZBJipoVDV46TfbGl9i4U+kTR4xQR2b25anSki/7w4V22O+Fqckm2cpY0jSrpszU9kyCWjxmtIMm2tw43BmBQ==}
+  /@architect/create/4.0.5:
+    resolution: {integrity: sha512-VKM848sIIpIse1NTFJGsdBd4aVwljoCdXjbxZEEzwXLFy1lqr4NlwFj7b8h5WCc1FdrCjVN2zascdrrlyThXQQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/inventory': 3.1.1
-      '@architect/utils': 3.1.1
+      '@architect/inventory': 3.2.0
+      '@architect/utils': 3.1.2
       chalk: 4.1.2
       lambda-runtimes: 1.1.2
       minimist: 1.2.6
     dev: true
 
-  /@architect/deploy/4.1.3:
-    resolution: {integrity: sha512-3uUqA6plBEwE7LDEdsrp9Fs2v4eHAPtNI2OGEEvnJbtqJLeVs13OQFCt7RL/4WNW+XlUgy3xH8B+7M2uW8np4Q==}
+  /@architect/deploy/4.2.1:
+    resolution: {integrity: sha512-paTSDFHWmfTtO2e5xX2oWKIGDnZiCa3RV9QPHZmJrolSzMtCngX0+8Dvz6sSGvCd9lXhhzTPTLXuWavuMDt5+A==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/create': 4.0.4
-      '@architect/hydrate': 3.0.3
-      '@architect/inventory': 3.1.1
-      '@architect/package': 8.1.3
-      '@architect/utils': 3.1.1
+      '@architect/create': 4.0.5
+      '@architect/hydrate': 3.0.4
+      '@architect/inventory': 3.2.0
+      '@architect/package': 8.1.4
+      '@architect/utils': 3.1.2
       chalk: 4.1.2
       fs-extra: 10.1.0
       get-folder-size: 2.0.1
-      glob: 8.0.1
+      glob: 8.0.3
       mime-types: 2.1.35
       minimist: 1.2.6
       path-sort: 0.1.0
@@ -75,12 +75,12 @@ packages:
       zipit: 2.0.0
     dev: true
 
-  /@architect/destroy/3.0.3:
-    resolution: {integrity: sha512-tya30jyzKrhHMevOeMEbkTzBrsyX8ebIMubXP/iz26/PCcBw9NxUiIKtLR6034eQKT/FJFfWXHsrfrF7pb1PyA==}
+  /@architect/destroy/3.0.4:
+    resolution: {integrity: sha512-KoU+7h+XHn41H8e5gVtFvU0Z6deg7D9kEDYohstD+FpUQBv2Dewurn3FNvzsyqQgD29p1OFGHJ8N7rjINNbksg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/inventory': 3.1.1
+      '@architect/inventory': 3.2.0
       '@architect/utils': 3.1.2
       aws-sdk: 2.1001.0
       minimist: 1.2.6
@@ -88,12 +88,12 @@ packages:
       run-waterfall: 1.1.7
     dev: true
 
-  /@architect/env/3.0.3:
-    resolution: {integrity: sha512-JBMcNUSk4aGeVGOROTJO6y6pYoCcIMfEoQQTJkThRWRSmp5vq1DKtar0oKPEGgg7Us7aF3p1vzy+6FmDOgeQnw==}
+  /@architect/env/3.0.4:
+    resolution: {integrity: sha512-S42OmT0jmmlrMjGIwdnz48klCUKihsW1n+nc5DJ1YH/U+si52AXj9YMXODcEWGS4P+EvlWqLcY9a84BH2zK83Q==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/inventory': 3.1.1
+      '@architect/inventory': 3.2.0
       '@architect/parser': 6.0.0
       '@architect/utils': 3.1.2
       aws-sdk: 2.1001.0
@@ -104,25 +104,25 @@ packages:
       yesno: 0.4.0
     dev: true
 
-  /@architect/hydrate/3.0.3:
-    resolution: {integrity: sha512-NfadPt85fLGCidQrnylhXktY8QqzArE50Qwq6xE1G7TiHy2nLLdSqS84c7i3O8yGvBujZO73397LsaXlNxZkEA==}
+  /@architect/hydrate/3.0.4:
+    resolution: {integrity: sha512-pRSzvjtLndK9a60vc9LuJMIyrvFVJDS59Sba99EoaKt/WYpATWN6iwlN4G8zqngAbPe0XQu0tHb/rfr+Z7dx4Q==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/inventory': 3.1.1
+      '@architect/inventory': 3.2.0
       '@architect/utils': 3.1.2
       acorn-loose: 8.3.0
       chalk: 4.1.2
       cpr: 3.0.1
       esquery: 1.4.0
-      glob: 7.2.0
+      glob: 8.0.3
       minimist: 1.2.6
       run-series: 1.1.9
       symlink-or-copy: 1.3.1
     dev: true
 
-  /@architect/inventory/3.1.1:
-    resolution: {integrity: sha512-eci85Qi8xZdm6nUDvPz2+2ppqAL4VqGx4CWasqE0bDq2XJ5T49+fpffS6aHI5OORZLXGS7aYe786Ui1oJ/v8dA==}
+  /@architect/inventory/3.2.0:
+    resolution: {integrity: sha512-WM4CwKsdRNOSMiR6U01wVqrANz+wcxztGQcPH2KTNRgCzhW+mCRc9fahu4QAiAfPPtYoVcvfpIHPCTLFLrGiPw==}
     engines: {node: '>=14'}
     dependencies:
       '@architect/asap': 5.0.1
@@ -131,12 +131,12 @@ packages:
       lambda-runtimes: 1.1.2
     dev: true
 
-  /@architect/logs/4.0.2:
-    resolution: {integrity: sha512-MTuDWPMjXrbjOq/vGc+zo+qnfcpL6GRkytyXBFOxYD5FeH8o9Tub+2qOswItKZQJVwo2iHZOdEAWAM2FYox7ZQ==}
+  /@architect/logs/4.0.3:
+    resolution: {integrity: sha512-h6Bl+s7vyRuKngFeO9Ns/HHkzxIkB6wBnjL5tShAfmt9K/fTipvL+4uo9/yWFaFu5Jp6Zxe8yEmk91IXatUAzw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@architect/inventory': 3.1.1
+      '@architect/inventory': 3.2.0
       '@architect/utils': 3.1.2
       aws-sdk: 2.1001.0
       chalk: 4.1.2
@@ -146,11 +146,11 @@ packages:
       strftime: 0.10.1
     dev: true
 
-  /@architect/package/8.1.3:
-    resolution: {integrity: sha512-dbcQhptezmlnxcw2VtEM22deI4qzXNRHjDSHDSPumtXtNlHGVZ3jJMIf/kfu9nrW9Ib5/P6Apa+AfeJ+TQ3f2A==}
+  /@architect/package/8.1.4:
+    resolution: {integrity: sha512-hMO16PKP6ph9SjuGgSc8J1mN3Jk3Vb8j4I1oNfUJ8mKniIbERHp2VqBBuiLA5mTzmLglJVl5XK+Frtd0kgCAaQ==}
     engines: {node: '>=14'}
     dependencies:
-      '@architect/inventory': 3.1.1
+      '@architect/inventory': 3.2.0
       '@architect/utils': 3.1.2
     dev: true
 
@@ -167,15 +167,15 @@ packages:
       source-map-support: 0.5.21
     dev: true
 
-  /@architect/sandbox/5.3.1:
-    resolution: {integrity: sha512-8P/F199Nz5IXe7wCZ8/JvyL7lvv+H6Am8+W7a+TS2zct3aSHJ6Nlvz6f0MtADqomWuMNT4TCot9H1lxNRNwCdQ==}
+  /@architect/sandbox/5.3.2:
+    resolution: {integrity: sha512-6pENvrykuENbfb8jKRZDmHrsbruPQgXNEF/BxrKWkFi4+qNcNDjIrIdef5bTRVBLMoBa2S07w3a9k8IFEHJ7Ug==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@architect/asap': 5.0.1
-      '@architect/create': 4.0.4
-      '@architect/hydrate': 3.0.3
-      '@architect/inventory': 3.1.1
+      '@architect/create': 4.0.5
+      '@architect/hydrate': 3.0.4
+      '@architect/inventory': 3.2.0
       '@architect/utils': 3.1.2
       '@begin/hashid': 1.0.0
       aws-sdk: 2.1001.0
@@ -201,19 +201,6 @@ packages:
       - debug
       - supports-color
       - utf-8-validate
-    dev: true
-
-  /@architect/utils/3.1.1:
-    resolution: {integrity: sha512-Dr1+zuG0EZzqQuv+BhR7NRAIMsGSVB3GuGuR5znLTzJMvFlrsV/LpLlwAjFIa9POVWBpNQodt6Y5p+TpR5FaUA==}
-    engines: {node: '>=14'}
-    dependencies:
-      chalk: 4.1.2
-      glob: 7.2.0
-      path-sort: 0.1.0
-      restore-cursor: 3.1.0
-      run-series: 1.1.9
-      run-waterfall: 1.1.7
-      sha: 3.0.0
     dev: true
 
   /@architect/utils/3.1.2:
@@ -998,18 +985,6 @@ packages:
       inflight: 1.0.6
       inherits: 2.0.4
       minimatch: 3.1.2
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: true
-
-  /glob/8.0.1:
-    resolution: {integrity: sha512-cF7FYZZ47YzmCu7dDy50xSRRfO3ErRfrXuLZcNIuyiJEco0XSrGtuilG19L5xp3NcwTx7Gn+X6Tv3fmsUPTbow==}
-    engines: {node: '>=12'}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 5.0.1
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
