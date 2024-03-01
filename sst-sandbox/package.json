@@ -1,9 +1,10 @@
 {
-  "name": "",
+  "name": "remix-sst",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "prepare": "prisma generate",
     "build": "remix build",
     "dev": "sst bind remix dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
@@ -13,13 +14,16 @@
     "sst:dev": "sst dev"
   },
   "dependencies": {
+    "@conform-to/react": "1.0.2",
+    "@prisma/client": "5.10.2",
     "@remix-run/css-bundle": "^2.8.0",
     "@remix-run/node": "^2.8.0",
     "@remix-run/react": "^2.8.0",
     "@remix-run/serve": "^2.8.0",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.0",
@@ -27,16 +31,17 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
+    "aws-cdk-lib": "2.124.0",
+    "constructs": "10.3.0",
     "eslint": "^8.38.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.1.6",
+    "prisma": "5.10.2",
     "sst": "^2.40.5",
-    "aws-cdk-lib": "2.124.0",
-    "constructs": "10.3.0"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18.0.0"
