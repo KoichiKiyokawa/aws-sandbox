@@ -1,0 +1,7 @@
+{
+  "name": "migrate",
+  "dependencies": {
+    "@prisma/client": "5.10.2",
+    "prisma": "5.10.2"
+  }
+}

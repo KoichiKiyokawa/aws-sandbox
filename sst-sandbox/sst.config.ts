@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { RDS, RemixSite } from "sst/constructs";
+import { Function, RDS, RemixSite, Script } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -25,16 +25,18 @@ export default {
 
       const DATABASE_URL = `postgresql://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?schema=public`;
 
+      const PRISMA_SCHEMA_FILE_PATH = "prisma/schema.prisma";
+      const PRISMA_BINARY_FILE_PATH =
+        "node_modules/prisma/libquery_engine-linux-arm64-openssl-1.0.x.so.node";
+
       const site = new RemixSite(stack, "site", {
         bind: [rds],
         cdk: {
           // https://dev.classmethod.jp/articles/aws-cdk-nodejsfunction-prisma-deploy/
           server: {
             copyFiles: [
-              { from: "prisma/schema.prisma" },
-              {
-                from: "node_modules/prisma/libquery_engine-linux-arm64-openssl-1.0.x.so.node",
-              },
+              { from: PRISMA_SCHEMA_FILE_PATH },
+              { from: PRISMA_BINARY_FILE_PATH },
             ],
           },
         },
@@ -47,6 +49,22 @@ export default {
       });
       stack.addOutputs({
         url: site.url,
+      });
+
+      const migrationFunc = new Function(stack, "migrate", {
+        runtime: "container",
+        handler: "functions/migrate",
+        environment: {
+          DATABASE_URL,
+        },
+        bind: [rds],
+        timeout: "120 seconds",
+      });
+      rds.cdk.cluster.grantDataApiAccess(migrationFunc);
+
+      new Script(stack, "migration", {
+        onCreate: migrationFunc,
+        onUpdate: migrationFunc,
       });
     });
   },
