@@ -1,4 +1,4 @@
-FROM node:18.7.0
+FROM node:23.5.0
 COPY . .
 ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.8/litestream-v0.3.8-linux-amd64.deb .
 RUN dpkg -i litestream-v0.3.8-linux-amd64.deb && \
