@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@conform-to/react": "1.0.2",
-    "@prisma/client": "5.10.2",
+    "@prisma/client": "5.22.0",
     "@remix-run/css-bundle": "^2.8.0",
     "@remix-run/node": "^2.8.0",
     "@remix-run/react": "^2.8.0",
@@ -39,7 +39,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prisma": "5.10.2",
+    "prisma": "5.22.0",
     "sst": "^2.40.5",
     "typescript": "^5.1.6"
   },
