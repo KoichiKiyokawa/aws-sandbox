@@ -1,6 +1,5 @@
 [tools]
 node = "22.23.2"
-# Keep app/package.json#packageManager in sync.
 pnpm = "12.5.1"
 terraform = "1.14.0"
 awscli = "2.36.49"

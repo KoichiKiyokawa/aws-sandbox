@@ -87,6 +87,6 @@ mise exec -- pnpm test:e2e
 
 `app/`と`terraform/`のどちらからも親の`mise.toml`が適用されます。README・CI・エージェントからの実行は`mise exec -- <コマンド>`に統一し、シェルのactivate設定には依存しません。子プロセスも同じPATHを引き継ぐため、`package.json`やシェルスクリプト内部では重ねて付けません。
 
-pnpmを更新するときは`mise.toml`と`app/package.json`の`packageManager`を同じバージョンに変更してください。JSの開発ツールは引き続きpnpmと`pnpm-lock.yaml`、Terraform providerは`.terraform.lock.hcl`で管理します。`mise install`はこれらの依存関係をインストールしません。
+pnpmのバージョンは`mise.toml`だけで管理します。更新時はこのファイルの指定を変更してください。JSの開発ツールは引き続きpnpmと`pnpm-lock.yaml`、Terraform providerは`.terraform.lock.hcl`で管理します。`mise install`はこれらの依存関係をインストールしません。
 
 `tanstack-start-lambda-dsql/`から`mise exec -- bash scripts/deploy.sh`でデプロイスクリプト全体に固定ツールを適用できます。`zip`とBashはOS側に必要です。LambdaのNodeランタイムはTerraform側の設定であり、miseによって変更されません。
