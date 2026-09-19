@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "jsx-a11y", "unicorn", "oxc"],
+  "jsPlugins": ["@shadcn/lint"],
+  "ignorePatterns": [
+    "src/routeTree.gen.ts",
+    ".output/**",
+    ".nitro/**",
+    ".tanstack/**",
+    ".data/**",
+    "drizzle/meta/**",
+    "playwright-report/**",
+    "test-results/**"
+  ],
+  "rules": {
+    "shadcn/no-restyle": ["error", { "allow": ["layout"] }],
+    "shadcn/no-raw-colors": "error",
+    "shadcn/no-arbitrary-values": "error",
+    "shadcn/no-inline-styles": "error",
+    "shadcn/require-static-classes": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "shadcn/no-restyle": "off",
+        "shadcn/no-raw-colors": "off",
+        "shadcn/no-arbitrary-values": "off"
+      }
+    }
+  ]
+}

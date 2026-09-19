@@ -5,7 +5,7 @@
 - `/assets/*`: 非公開 S3。CloudFront OAC のみ読み取り可能。Vite のハッシュ付きファイルを長期キャッシュ。
 - その他: Lambda Function URL。SSR・API をキャッシュせず、Cookie・クエリ・Authorization を転送。Host は Lambda のドメインに置換。
 - Lambda は Function URL に直接アクセスすることも可能です。アプリ認証は未実装です。Lambda OAC は POST/PUT にリクエスト本文の SHA256 を要求するため、この構成では使用しません。
-- DSQL 接続先・IAM 権限を Lambda に設定します。SQL クライアント・テーブル・マイグレーションは未実装です。接続時は IAM トークンを生成する必要があります。sandbox 用に対象クラスターの DbConnectAdmin を許可します。
+- DSQL 接続先・IAM 権限を Lambda に設定します。アプリは Drizzle と IAM トークン認証で接続します。初回デプロイ時は、ローカルの app/ から対象クラスターの DSQL_HOST と AWS 認証を設定して `pnpm db:setup` を実行し、TODO テーブルを作成してください。汎用マイグレーターは含みません。sandbox 用に対象クラスターの DbConnectAdmin を許可します。
 
 ## 初回
 

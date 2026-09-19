@@ -1,16 +1,55 @@
+@import 'tailwindcss';
 
-
-* {
-  box-sizing: border-box;
+@theme inline {
+  --font-sans: 'Inter', 'Noto Sans JP', ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--primary);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
-
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
+:root {
+  --background: oklch(0.981 0.005 85);
+  --foreground: oklch(0.25 0.025 165);
+  --card: oklch(1 0 0);
+  --primary: oklch(0.43 0.082 168);
+  --primary-foreground: oklch(0.995 0 0);
+  --secondary: oklch(0.955 0.009 150);
+  --muted-foreground: oklch(0.48 0.018 160);
+  --accent: oklch(0.93 0.035 160);
+  --destructive: oklch(0.55 0.2 28);
+  --border: oklch(0.9 0.008 150);
+  --radius: 0.75rem;
 }
-
-main {
-  width: min(42rem, calc(100% - 2rem));
-  margin: 4rem auto;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply m-0 bg-background font-sans text-foreground antialiased;
+  }
+  button:not(:disabled),
+  [role='checkbox']:not([data-disabled]) {
+    cursor: pointer;
+  }
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
 }
-
