@@ -48,9 +48,16 @@ export async function connectDatabase() {
 
 let connection: ReturnType<typeof connectDatabase> | undefined
 export function getDatabase() {
-  connection ??= connectDatabase().catch((error) => {
-    connection = undefined
-    throw error
-  })
+  connection ??= connectDatabase()
+    .then(async (database) => {
+      // Register from the SSR module that owns this connection.
+      const { useNitroHooks } = await import('nitro/app')
+      useNitroHooks().hook('close', database.close)
+      return database
+    })
+    .catch((error) => {
+      connection = undefined
+      throw error
+    })
   return connection
 }
