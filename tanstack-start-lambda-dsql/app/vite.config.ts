@@ -8,7 +8,10 @@ import { nitro } from 'nitro/vite'
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
-    nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+    nitro({
+      serveStatic: process.env.NITRO_PRESET !== 'aws-lambda',
+      rollupConfig: { external: [/^@sentry\//] },
+    }),
 
     tanstackStart(),
     viteReact(),

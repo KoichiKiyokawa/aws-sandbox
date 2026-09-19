@@ -9,6 +9,8 @@
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
+    "build:lambda": "NITRO_PRESET=aws-lambda vite build",
+    "test:lambda": "node scripts/test-lambda.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

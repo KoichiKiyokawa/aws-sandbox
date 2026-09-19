@@ -5,9 +5,9 @@ Lambda・Aurora DSQL・Terraform を検証するプロジェクトです。
 ## 構成
 
 - `app/`: 動作確認済みの TanStack Start アプリ。SSR、動的 URL、API をコードで定義します。
-- `terraform/`: 今後実装する AWS インフラの配置先。
+- `terraform/`: CloudFront・非公開 S3・Lambda・Aurora DSQL・IAM の定義。
 
-現時点ではローカル開発と Nitro の Node サーバー向けビルドのみ実装済みです。Lambda 対応、DSQL 接続、Terraform リソースは次の作業です。
+CloudFront は `/assets/*` を S3、それ以外を Lambda に転送します。基盤は Terraform、アプリ更新は `bash scripts/deploy.sh` で行います。[構築・更新手順](terraform/README.md)を参照してください。DSQL はリソースと接続設定までで、SQL 処理は未実装です。
 
 ## 実行
 
