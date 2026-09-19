@@ -1,3 +1,11 @@
+import { createHook } from 'node:async_hooks'
+const activeTimers = new Map()
+const timerHook = createHook({
+  init(id, type, _trigger, resource) {
+    if (type === 'Timeout') activeTimers.set(id, { resource, stack: new Error().stack })
+  },
+  destroy(id) { activeTimers.delete(id) },
+}).enable()
 import assert from 'node:assert/strict'
 import { readFile, mkdtemp, rm } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
@@ -58,3 +66,8 @@ assert.equal((await get(assetPath)).statusCode, 404, 'Lambda must not serve S3 a
 console.log('Lambda handler: SSR, dynamic route, JSON, 404 and S3 asset routing passed')
 
 await rm(dataDir, { recursive: true, force: true })
+
+for (const { resource, stack } of activeTimers.values()) {
+  if (resource.hasRef()) console.log('ACTIVE TIMER', resource._idleTimeout, stack)
+}
+timerHook.disable()

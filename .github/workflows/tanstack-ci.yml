@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'tanstack-start-lambda-dsql/**'
+      - '!tanstack-start-lambda-dsql/**/*.md'
       - '.github/workflows/tanstack-ci.yml'
   push:
     branches: [main]
     paths:
       - 'tanstack-start-lambda-dsql/**'
+      - '!tanstack-start-lambda-dsql/**/*.md'
       - '.github/workflows/tanstack-ci.yml'
   workflow_dispatch:
 
@@ -54,8 +56,10 @@ jobs:
         run: mise exec -- pnpm typecheck
       - name: Unit and database tests
         run: mise exec -- pnpm test
-      - name: Install Chromium
-        run: mise exec -- pnpm exec playwright install --with-deps chromium
+      # ubuntu-24.04 already provides Chromium's shared libraries.
+      # The default headless project only needs the shell, not the full browser.
+      - name: Install Chromium headless shell
+        run: mise exec -- pnpm exec playwright install --only-shell chromium
       # Playwright builds and starts the Node server with an isolated PGlite DB.
       - name: Node build and browser tests
         run: mise exec -- pnpm test:e2e
