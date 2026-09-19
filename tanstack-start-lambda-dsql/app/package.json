@@ -19,7 +19,9 @@
     "test:e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
     "db:setup": "node --env-file-if-exists=.env --import tsx scripts/db-setup.ts",
-    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test"
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test",
+    "build:lambda": "NITRO_PRESET=aws-lambda vite build",
+    "test:lambda": "node scripts/test-lambda.mjs"
   },
   "dependencies": {
     "@aws-sdk/dsql-signer": "^3.1134.0",

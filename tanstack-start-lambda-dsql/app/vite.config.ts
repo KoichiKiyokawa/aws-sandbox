@@ -10,7 +10,10 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tailwindcss(),
-    nitro({ rollupConfig: { external: [/^@sentry\//, '@electric-sql/pglite'] } }),
+    nitro({
+      serveStatic: process.env.NITRO_PRESET !== 'aws-lambda',
+      rollupConfig: { external: [/^@sentry\//, '@electric-sql/pglite'] },
+    }),
 
     tanstackStart(),
     viteReact(),

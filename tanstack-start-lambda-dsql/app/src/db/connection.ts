@@ -5,14 +5,16 @@ import { Pool } from 'pg'
 
 // Imported only by server functions and the database setup script.
 export async function connectDatabase() {
-  if (process.env.DSQL_HOST) {
-    const user = process.env.DSQL_USER || 'admin'
+  const dsqlHost =
+    process.env.DSQL_HOST || (process.env.DSQL_REGION ? process.env.PGHOST : undefined)
+  if (dsqlHost) {
+    const user = process.env.DSQL_USER || process.env.PGUSER || 'admin'
     const signer = new DsqlSigner({
-      hostname: process.env.DSQL_HOST,
-      region: process.env.AWS_REGION || 'ap-northeast-1',
+      hostname: dsqlHost,
+      region: process.env.DSQL_REGION || process.env.AWS_REGION || 'ap-northeast-1',
     })
     const pool = new Pool({
-      host: process.env.DSQL_HOST,
+      host: dsqlHost,
       user,
       database: 'postgres',
       password: () =>

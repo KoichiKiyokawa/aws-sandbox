@@ -32,11 +32,13 @@ http://localhost:3000/ を開きます。DockerやAWS認証は不要です。デ
 | `DSQL_USER` | DSQLのDBユーザー。既定値`admin` |
 | `AWS_REGION` | DSQLリージョン。既定値`ap-northeast-1` |
 
+Terraformが設定する`PGHOST`・`PGUSER`・`DSQL_REGION`にも対応しています。
+
 DSQLはAWS SDKの認証チェーンを使い、新規DB接続時にIAM認証トークンを発行します。`admin`には`dsql:DbConnectAdmin`、一般DBユーザーには`dsql:DbConnect`とDB側のユーザーマッピング・権限が必要です。TLS証明書を検証します。Lambda上でDB接続先が未設定の場合はエラーとし、ローカルファイルへの保存には切り替えません。
 
 `pnpm db:setup`は指定したDBへ初期テーブルを作成します。DSQL用にDDLを単独実行し、トランザクションで囲みません。既存テーブルがある場合は何もしません。**スキーマ変更を適用する汎用マイグレーターではありません。** スキーマ変更時は`pnpm db:generate`でSQLを生成し、対象DBの制約を確認して適用してください。UUIDはアプリ側で生成し、連番・外部キー・二次インデックスを使用していません。
 
-DSQLへの実接続・AWSデプロイは未検証です。Lambda/Terraformの構成は本PRの範囲外です。本番ビルドはPR #93と同じNitroのNodeサーバー向けです。
+DSQLへの実接続・AWSデプロイは未検証です。CloudFront・S3・Lambda・DSQLのTerraform定義とデプロイスクリプトはmainから取り込んでいます。`pnpm build`はNodeサーバー向け、`pnpm build:lambda`はLambda向けです。[構築・更新手順](terraform/README.md)を参照してください。CloudFrontは`/assets/*`をS3、それ以外をLambdaへ転送します。デプロイ先のDBにも初回は`pnpm db:setup`でテーブルを作成してください。
 
 このアプリは認証なしの共有TODOです。同じDBに接続する利用者は同じタスクを操作します。
 
