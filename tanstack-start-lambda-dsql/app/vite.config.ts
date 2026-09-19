@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 
@@ -8,7 +9,8 @@ import { nitro } from 'nitro/vite'
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
-    nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+    tailwindcss(),
+    nitro({ rollupConfig: { external: [/^@sentry\//, '@electric-sql/pglite'] } }),
 
     tanstackStart(),
     viteReact(),

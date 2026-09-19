@@ -12,3 +12,8 @@ src/routeTree.gen.ts
 .vinxi
 __unconfig*
 todos.json
+.data
+playwright-report
+test-results
+.env.*
+!.env.example
