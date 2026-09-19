@@ -51,12 +51,7 @@ jobs:
       - name: Lint
         run: mise exec -- pnpm lint
       - name: Check formatting
-        run: |
-          if ! mise exec -- pnpm format:check; then
-            mise exec -- pnpm exec oxfmt --write scripts/test-lambda.mjs
-            git diff
-            exit 1
-          fi
+        run: mise exec -- pnpm format:check
       - name: Check types
         run: mise exec -- pnpm typecheck
       - name: Unit and database tests
