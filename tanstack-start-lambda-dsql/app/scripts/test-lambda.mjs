@@ -54,12 +54,9 @@ try {
   const assetPath = home.body.match(/(?:src|href)="([^" ]+\.js)"/)?.[1]
   assert.ok(assetPath, 'SSR HTML must include a client JavaScript asset')
   assert.ok(assetPath.startsWith('/assets/'), 'CloudFront routes client assets to S3')
-  assert.ok(
-    (await readFile(new URL('../.output/public' + assetPath, import.meta.url))).length > 100,
-  )
+  assert.ok((await readFile(new URL('../.output/public' + assetPath, import.meta.url))).length > 100)
   assert.equal((await get(assetPath)).statusCode, 404, 'Lambda must not serve S3 assets')
   console.log('Lambda handler: SSR, dynamic route, JSON, 404 and S3 asset routing passed')
-
 } finally {
   // Invoke the built application's shutdown hooks before removing its database.
   try {
