@@ -18,7 +18,7 @@ resource "aws_lambda_function" "app" {
   handler          = "index.handler"
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  # Code is initialized here; subsequent releases use scripts/deploy.sh.
+  # Code is initialized here; subsequent releases use mise run app:deploy.
   lifecycle {
     ignore_changes = [filename, source_code_hash]
   }
