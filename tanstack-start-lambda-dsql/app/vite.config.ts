@@ -11,7 +11,6 @@ const config = defineConfig({
   plugins: [
     tailwindcss(),
     nitro({
-      plugins: ['./src/database-lifecycle.ts'],
       serveStatic: process.env.NITRO_PRESET !== 'aws-lambda',
       rollupConfig: { external: [/^@sentry\//, '@electric-sql/pglite'] },
     }),
