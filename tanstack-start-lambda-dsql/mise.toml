@@ -1,5 +1,5 @@
 [tools]
 node = "22.23.2"
 pnpm = "12.5.1"
-terraform = "1.14.0"
+terraform = "1.16.2"
 awscli = "2.36.49"
