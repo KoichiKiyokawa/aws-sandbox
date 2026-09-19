@@ -33,29 +33,32 @@ jobs:
         working-directory: tanstack-start-lambda-dsql/app
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
         with:
-          package_json_file: tanstack-start-lambda-dsql/app/package.json
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+          version: '2026.9.11'
+          working_directory: tanstack-start-lambda-dsql
+      - name: Locate pnpm store
+        id: pnpm-store
+        run: echo "path=$(mise exec -- pnpm store path)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          node-version: '22'
-          cache: pnpm
-          cache-dependency-path: tanstack-start-lambda-dsql/app/pnpm-lock.yaml
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml') }}
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: mise exec -- pnpm install --frozen-lockfile
       - name: Lint
-        run: pnpm lint
+        run: mise exec -- pnpm lint
       - name: Check formatting
-        run: pnpm format:check
+        run: mise exec -- pnpm format:check
       - name: Check types
-        run: pnpm typecheck
+        run: mise exec -- pnpm typecheck
       - name: Unit and database tests
-        run: pnpm test
+        run: mise exec -- pnpm test
       - name: Install Chromium
-        run: pnpm exec playwright install --with-deps chromium
+        run: mise exec -- pnpm exec playwright install --with-deps chromium
       # Playwright builds and starts the Node server with an isolated PGlite DB.
       - name: Node build and browser tests
-        run: pnpm test:e2e
+        run: mise exec -- pnpm test:e2e
 
   lambda-terraform:
     name: Lambda and Terraform tests
@@ -69,31 +72,30 @@ jobs:
       TF_INPUT: 'false'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
         with:
-          package_json_file: tanstack-start-lambda-dsql/app/package.json
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+          version: '2026.9.11'
+          working_directory: tanstack-start-lambda-dsql
+      - name: Locate pnpm store
+        id: pnpm-store
+        run: echo "path=$(mise exec -- pnpm --dir ../app store path)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          node-version: '22'
-          cache: pnpm
-          cache-dependency-path: tanstack-start-lambda-dsql/app/pnpm-lock.yaml
-      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
-        with:
-          terraform_version: '1.14.0'
-          terraform_wrapper: false
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml') }}
       - name: Install dependencies
-        run: pnpm --dir ../app install --frozen-lockfile
+        run: mise exec -- pnpm --dir ../app install --frozen-lockfile
       # The real archive provider packages this output during terraform test.
       - name: Build Lambda
-        run: pnpm --dir ../app build:lambda
+        run: mise exec -- pnpm --dir ../app build:lambda
       - name: Test Lambda handler
-        run: pnpm --dir ../app test:lambda
+        run: mise exec -- pnpm --dir ../app test:lambda
       - name: Check Terraform formatting
-        run: terraform fmt -check -recursive
+        run: mise exec -- terraform fmt -check -recursive
       - name: Initialize Terraform
-        run: terraform init -backend=false -lockfile=readonly -input=false
+        run: mise exec -- terraform init -backend=false -lockfile=readonly -input=false
       - name: Validate Terraform
-        run: terraform validate
+        run: mise exec -- terraform validate
       # routing.tftest.hcl mocks AWS; no AWS credentials or deployment are needed.
       - name: Test Terraform
-        run: terraform test
+        run: mise exec -- terraform test
