@@ -54,3 +54,9 @@ export function getDatabase() {
   })
   return connection
 }
+
+export async function closeDatabase() {
+  const current = connection
+  connection = undefined
+  await (await current)?.close()
+}
