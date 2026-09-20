@@ -9,7 +9,7 @@ PR #93のコード定義ルーティングを維持したTODOアプリです。
 
 ## 起動
 
-[mise](https://mise.jdx.dev/getting-started.html)でNode.js・pnpm・Terraform・AWS CLIのバージョンを管理します。固定バージョンは`mise.toml`を参照してください。ローカルとCIは同じ設定を使用します。
+[mise](https://mise.jdx.dev/getting-started.html)でNode.js・pnpm・Pulumi・AWS CLIのバージョンを管理します。固定バージョンは`mise.toml`を参照してください。ローカルとCIは同じ設定を使用します。
 
 初回はプロジェクトの設定を確認してから、ツールを導入します。
 
@@ -41,13 +41,13 @@ http://localhost:3000/ を開きます。DockerやAWS認証は不要です。デ
 | `DSQL_USER` | DSQLのDBユーザー。既定値`admin` |
 | `AWS_REGION` | DSQLリージョン。既定値`ap-northeast-1` |
 
-Terraformが設定する`PGHOST`・`PGUSER`・`DSQL_REGION`にも対応しています。
+Pulumiが設定する`PGHOST`・`PGUSER`・`DSQL_REGION`にも対応しています。
 
 DSQLはAWS SDKの認証チェーンを使い、新規DB接続時にIAM認証トークンを発行します。`admin`には`dsql:DbConnectAdmin`、一般DBユーザーには`dsql:DbConnect`とDB側のユーザーマッピング・権限が必要です。TLS証明書を検証します。Lambda上でDB接続先が未設定の場合はエラーとし、ローカルファイルへの保存には切り替えません。
 
 `mise run db:setup`は指定したDBへ初期テーブルを作成します。DSQL用にDDLを単独実行し、トランザクションで囲みません。既存テーブルがある場合は何もしません。**スキーマ変更を適用する汎用マイグレーターではありません。** スキーマ変更時は`mise exec -- pnpm --dir app db:generate`でSQLを生成し、対象DBの制約を確認して適用してください。UUIDはアプリ側で生成し、連番・外部キー・二次インデックスを使用していません。
 
-DSQLへの実接続・AWSデプロイは未検証です。CloudFront・S3・Lambda・DSQLのTerraform定義と、miseのデプロイタスクを用意しています。`mise run app:build:node`はNodeサーバー向け、`mise run app:build`はLambda向けです。[構築・更新手順](terraform/README.md)を参照してください。CloudFrontは`/assets/*`をS3、それ以外をLambdaへ転送します。デプロイ先のDBにも初回は`mise run db:setup`でテーブルを作成してください。
+DSQLへの実接続・AWSデプロイは未検証です。CloudFront・S3・Lambda・DSQLのPulumi定義と、miseのデプロイタスクを用意しています。`mise run app:build:node`はNodeサーバー向け、`mise run app:build`はLambda向けです。[構築・更新手順](pulumi/README.md)を参照してください。CloudFrontは`/assets/*`をS3、それ以外をLambdaへ転送します。デプロイ先のDBにも初回は`mise run db:setup`でテーブルを作成してください。
 
 このアプリは認証なしの共有TODOです。同じDBに接続する利用者は同じタスクを操作します。
 
@@ -84,8 +84,8 @@ mise run app:e2e
 
 ## ツールの実行と更新
 
-`app/`と`terraform/`のどちらからも親の`mise.toml`が適用されます。日常操作は`mise run <タスク名>`、個別コマンドは`mise exec -- <コマンド>`を使用します。どちらも固定ツールを適用し、シェルのactivate設定には依存しません。子プロセスも同じPATHを引き継ぐため、`package.json`やシェルスクリプト内部では重ねて付けません。
+`app/`と`pulumi/`のどちらからも親の`mise.toml`が適用されます。日常操作は`mise run <タスク名>`、個別コマンドは`mise exec -- <コマンド>`を使用します。どちらも固定ツールを適用し、シェルのactivate設定には依存しません。子プロセスも同じPATHを引き継ぐため、`package.json`やシェルスクリプト内部では重ねて付けません。
 
-pnpmのバージョンは`mise.toml`だけで管理します。更新時はこのファイルの指定を変更してください。JSの開発ツールは引き続きpnpmと`pnpm-lock.yaml`、Terraform providerは`.terraform.lock.hcl`で管理します。`mise install`はこれらの依存関係をインストールしません。
+pnpmのバージョンは`mise.toml`だけで管理します。更新時はこのファイルの指定を変更してください。JSの開発ツールは引き続きpnpmと`pnpm-lock.yaml`、Pulumi SDK/providerは`pulumi/pnpm-lock.yaml`で管理します。`mise install`はこれらの依存関係をインストールしません。
 
-タスクの処理・作業ディレクトリ・前提条件はコメント付きで`mise.toml`に集約しています。`mise tasks`で一覧を表示し、`mise run tf:apply`でインフラ適用、`mise run app:deploy`でアプリを更新できます。`zip`とBashはOS側に必要です。LambdaのNodeランタイムはTerraform側の設定であり、miseによって変更されません。
+タスクの処理・作業ディレクトリ・前提条件はコメント付きで`mise.toml`に集約しています。`mise tasks`で一覧を表示し、`mise run app:deploy`でビルド・検証後にインフラとアプリをまとめて更新します。変更内容だけを確認する場合は`mise run app:build`の後に`mise run infra:preview`を実行してください。BashはOS側に必要です。LambdaのNodeランタイムはPulumi側の設定であり、miseによって変更されません。

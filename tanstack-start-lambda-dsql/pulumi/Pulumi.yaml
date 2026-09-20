@@ -1,0 +1,11 @@
+name: tanstack-start-lambda-dsql
+description: CloudFront, S3, Lambda and Aurora DSQL for the TanStack Start sandbox
+runtime:
+  name: nodejs
+  options:
+    typescript: false
+    nodeargs: --import tsx
+main: index.ts
+config:
+  aws:region:
+    value: ap-northeast-1

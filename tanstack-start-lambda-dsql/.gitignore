@@ -9,3 +9,10 @@ terraform/*.zip
 .env
 .env.*
 !.env.example
+
+# Pulumi dependencies, local state and per-environment configuration.
+pulumi/node_modules/
+pulumi/.pulumi/
+pulumi/Pulumi.*.yaml
+pulumi/import.json
+**/terraform-state.json

@@ -60,16 +60,13 @@ jobs:
       - name: Node build and browser tests
         run: mise exec -- pnpm test:e2e
 
-  lambda-terraform:
-    name: Lambda and Terraform tests
+  lambda-pulumi:
+    name: Lambda and Pulumi tests
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: tanstack-start-lambda-dsql/terraform
-    env:
-      TF_IN_AUTOMATION: 'true'
-      TF_INPUT: 'false'
+        working-directory: tanstack-start-lambda-dsql
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
@@ -78,24 +75,15 @@ jobs:
           working_directory: tanstack-start-lambda-dsql
       - name: Locate pnpm store
         id: pnpm-store
-        run: echo "path=$(mise exec -- pnpm --dir ../app store path)" >> "$GITHUB_OUTPUT"
+        run: echo "path=$(mise exec -- pnpm --dir app store path)" >> "$GITHUB_OUTPUT"
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.pnpm-store.outputs.path }}
-          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml') }}
-      - name: Install dependencies
-        run: mise exec -- pnpm --dir ../app install --frozen-lockfile
-      # The real archive provider packages this output during terraform test.
-      - name: Build Lambda
-        run: mise exec -- pnpm --dir ../app build:lambda
-      - name: Test Lambda handler
-        run: mise exec -- pnpm --dir ../app test:lambda
-      - name: Check Terraform formatting
-        run: mise exec -- terraform fmt -check -recursive
-      - name: Initialize Terraform
-        run: mise exec -- terraform init -backend=false -lockfile=readonly -input=false
-      - name: Validate Terraform
-        run: mise exec -- terraform validate
-      # routing.tftest.hcl mocks AWS; no AWS credentials or deployment are needed.
-      - name: Test Terraform
-        run: mise exec -- terraform test
+          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml', 'tanstack-start-lambda-dsql/pulumi/pnpm-lock.yaml') }}
+      - name: Install infrastructure dependencies
+        run: mise run infra:install
+      - name: Build and test Lambda handler
+        run: mise run app:build
+      # Pulumi SDK mocks preserve routing/IAM/DSQL tests without AWS credentials.
+      - name: Check infrastructure
+        run: mise run infra:check
