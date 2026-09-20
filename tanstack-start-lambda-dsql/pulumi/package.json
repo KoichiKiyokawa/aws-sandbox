@@ -1,0 +1,15 @@
+{
+  "name": "tanstack-start-lambda-dsql-infra",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@pulumi/aws": "7.47.0",
+    "@pulumi/pulumi": "3.263.0",
+    "mime": "4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "tsx": "4.23.13",
+    "typescript": "6.0.2"
+  }
+}

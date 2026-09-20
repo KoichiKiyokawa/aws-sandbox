@@ -1,11 +1,11 @@
 [tools]
 node = "22.23.2"
 pnpm = "12.5.1"
-terraform = "1.14.0"
+pulumi = "3.263.0"
 awscli = "2.36.49"
 
 # 日常操作は mise run <タスク名>。一覧は mise tasks。
-# dir はこのファイルを基準に固定し、app/ や terraform/ からも同じ場所で実行する。
+# dir はこのファイルを基準に固定し、app/ や pulumi/ からも同じ場所で実行する。
 # mise run 自体が上記ツールを適用するため、run 内の mise exec は不要。
 
 # 依存関係はロックファイル通りに導入する。初回と依存更新の取り込み後に実行。
@@ -25,7 +25,7 @@ description = "Lint・フォーマット・型チェック・DBテスト"
 dir = "{{config_root}}/app"
 run = "pnpm check"
 
-# Terraform の plan/apply も ZIP 元の .output/server を必要とする。
+# Pulumi の preview/up も ZIP 元の .output/server を必要とする。
 # インストール → Lambda用ビルド → ハンドラー検証を直列実行する。
 [tasks."app:build"]
 description = "Lambda向けビルドとハンドラー検証"
@@ -51,50 +51,38 @@ description = "接続先DBに初期テーブルを作成"
 dir = "{{config_root}}/app"
 run = "pnpm db:setup"
 
-[tasks."tf:init"]
-description = "Terraformのprovider・backendを初期化"
-dir = "{{config_root}}/terraform"
-run = "terraform init"
+# Pulumiの依存関係を導入。package.jsonに操作コマンドは重複定義しない。
+[tasks."infra:install"]
+description = "Pulumiの依存関係をインストール"
+dir = "{{config_root}}/pulumi"
+run = "pnpm install --no-frozen-lockfile"
 
-# 初回構築: app:build → tf:init → tf:plan → tf:apply → app:deploy。
-# plan/apply 前にAWS認証を設定する。tf:apply はTerraformの確認プロンプトを維持する。
-[tasks."tf:plan"]
+# 初回構築: infra:install → backend/stack選択 → app:build → infra:preview → infra:up → app:deploy。
+# backend/stackの初期化と既存Terraform環境の引継ぎはpulumi/README.mdを参照。
+# Lambdaコード・静的ファイルもPulumiが管理する。preview/up前にapp:buildを実行する。
+[tasks."infra:preview"]
 description = "インフラの変更内容を確認"
-dir = "{{config_root}}/terraform"
-run = "terraform plan"
+dir = "{{config_root}}/pulumi"
+run = "pulumi preview --refresh"
 
-[tasks."tf:apply"]
+[tasks."infra:up"]
 description = "インフラの変更を適用"
 raw = true
-dir = "{{config_root}}/terraform"
-run = "terraform apply"
+dir = "{{config_root}}/pulumi"
+run = "pulumi up --refresh"
 
-# tf:init と app:build 後に実行。test はモックproviderを使用する。
-[tasks."tf:check"]
-description = "Terraformの書式・構文・モックテスト"
-dir = "{{config_root}}/terraform"
-run = ["terraform fmt -check", "terraform validate", "terraform test"]
+# AWS認証・Pulumiログイン不要。AWSリソースはモックし、構成と移行処理を検証する。
+[tasks."infra:check"]
+description = "Pulumiの型チェック・構成・移行テスト"
+dir = "{{config_root}}/pulumi"
+run = ["pnpm exec tsc --noEmit", "node --import tsx --test tests/*.test.ts tests/*.test.mjs"]
 
-# tf:apply 済みのstateとAWS認証が前提。DB初期化は db:setup で別途実施する。
-# ビルド検証に成功した後だけアップロードする。Terraformの適用は行わない。
+# ビルド・ハンドラー検証に成功してから、インフラとアプリを一括更新する。
+# Pulumiが新アセットの配置後にLambdaを更新し、旧アセットはS3に残す。
+# 初回のbackend/stack選択と既存環境のimportはpulumi/README.mdを参照。
 [tasks."app:deploy"]
-description = "ビルド・検証後、S3アセットとLambdaコードを更新"
-dir = "{{config_root}}"
-run = '''
-#!/usr/bin/env bash
-set -euo pipefail
-region=$(terraform -chdir=terraform output -raw aws_region)
-bucket=$(terraform -chdir=terraform output -raw assets_bucket)
-function_name=$(terraform -chdir=terraform output -raw lambda_function_name)
-mise run app:build
-# Lambdaを切り替える前にアセットを配置。開いたままの旧ページ用に旧ファイルも保持する。
-aws s3 sync app/.output/public/assets/ "s3://$bucket/assets/" --region "$region" --cache-control 'public,max-age=31536000,immutable'
-# ZIPは一時ディレクトリに作成し、失敗時も終了時に削除する。
-archive=$(mktemp -d)
-trap 'rm -rf "$archive"' EXIT
-(cd app/.output/server && zip -qr "$archive/lambda.zip" .)
-aws lambda update-function-code --region "$region" --function-name "$function_name" --zip-file "fileb://$archive/lambda.zip" > /dev/null
-# 更新完了を待ってから公開URLを表示する。
-aws lambda wait function-updated-v2 --region "$region" --function-name "$function_name"
-terraform -chdir=terraform output -raw app_url
-'''
+description = "ビルド・検証後、Pulumiでインフラとアプリを更新"
+raw = true
+depends = ["infra:install", "app:build"]
+dir = "{{config_root}}/pulumi"
+run = "pulumi up --refresh"
