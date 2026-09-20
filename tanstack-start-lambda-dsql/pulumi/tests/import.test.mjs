@@ -3,7 +3,7 @@ import test from "node:test";
 import { createImportManifest } from "../import-state.mjs";
 
 const types = [
-  ["aws_dsql_cluster", "main", { id: "cluster123" }],
+  ["aws_dsql_cluster", "main", { identifier: "cluster123" }],
   ["aws_cloudwatch_log_group", "lambda", { name: "/aws/lambda/test" }],
   ["aws_iam_role", "lambda", { name: "test-lambda" }],
   ["aws_iam_role_policy", "lambda", { role: "test-lambda", name: "logs-and-dsql" }],
@@ -36,6 +36,6 @@ test("rejects incomplete, indexed, or unexpected managed resources instead of si
   assert.throws(() => createImportManifest(extra), /unsupported/i);
   const indexed = state(); indexed.resources[0].instances[0].index_key = 0;
   assert.throws(() => createImportManifest(indexed), /indexed/i);
-  const empty = state(); empty.resources[0].instances[0].attributes.id = "";
+  const empty = state(); empty.resources[0].instances[0].attributes.identifier = "";
   assert.throws(() => createImportManifest(empty), /id/i);
 });

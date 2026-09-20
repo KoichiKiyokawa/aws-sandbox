@@ -55,9 +55,9 @@ run = "pnpm db:setup"
 [tasks."infra:install"]
 description = "Pulumiの依存関係をインストール"
 dir = "{{config_root}}/pulumi"
-run = "pnpm install --no-frozen-lockfile"
+run = "pnpm install --frozen-lockfile"
 
-# 初回構築: infra:install → backend/stack選択 → app:build → infra:preview → infra:up → app:deploy。
+# 初回構築: infra:install → backend/stack選択 → app:build → infra:preview → infra:up。
 # backend/stackの初期化と既存Terraform環境の引継ぎはpulumi/README.mdを参照。
 # Lambdaコード・静的ファイルもPulumiが管理する。preview/up前にapp:buildを実行する。
 [tasks."infra:preview"]

@@ -4,9 +4,8 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as pulumi from "@pulumi/pulumi";
-import type { MockResourceArgs } from "@pulumi/pulumi/runtime";
 
-const registered: MockResourceArgs[] = [];
+const registered: pulumi.runtime.MockResourceArgs[] = [];
 pulumi.runtime.setMocks({
   newResource(args) {
     registered.push(args);

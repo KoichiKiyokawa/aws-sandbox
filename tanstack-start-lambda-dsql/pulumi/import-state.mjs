@@ -4,7 +4,7 @@ import { pathToFileURL } from "node:url";
 // Input: terraform state pull (raw state v4), not terraform show -json.
 // Names match resources.ts. This only generates a manifest; it never changes either state.
 const mappings = {
-  "aws_dsql_cluster.main": ["aws:dsql/cluster:Cluster", "main", a => a.id],
+  "aws_dsql_cluster.main": ["aws:dsql/cluster:Cluster", "main", a => a.identifier],
   "aws_cloudwatch_log_group.lambda": ["aws:cloudwatch/logGroup:LogGroup", "lambda", a => a.name],
   "aws_iam_role.lambda": ["aws:iam/role:Role", "lambda", a => a.name],
   "aws_iam_role_policy.lambda": ["aws:iam/rolePolicy:RolePolicy", "lambda", a => a.role && a.name && `${a.role}:${a.name}`],

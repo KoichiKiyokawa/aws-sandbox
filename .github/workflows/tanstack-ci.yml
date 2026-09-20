@@ -79,11 +79,9 @@ jobs:
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ steps.pnpm-store.outputs.path }}
-          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml') }}
+          key: pnpm-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tanstack-start-lambda-dsql/mise.toml', 'tanstack-start-lambda-dsql/app/pnpm-lock.yaml', 'tanstack-start-lambda-dsql/pulumi/pnpm-lock.yaml') }}
       - name: Install infrastructure dependencies
         run: mise run infra:install
-      - name: Capture initial dependency lock
-        run: cat pulumi/pnpm-lock.yaml
       - name: Build and test Lambda handler
         run: mise run app:build
       # Pulumi SDK mocks preserve routing/IAM/DSQL tests without AWS credentials.
