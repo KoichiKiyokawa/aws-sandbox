@@ -19,6 +19,7 @@
     "test:e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
     "db:setup": "node --env-file-if-exists=.env --import tsx scripts/db-setup.ts",
+    "db:tablepro": "node --env-file-if-exists=.env --import tsx scripts/open-tablepro.ts",
     "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test",
     "build:lambda": "NITRO_PRESET=aws-lambda vite build",
     "test:lambda": "node scripts/test-lambda.mjs"
@@ -45,6 +46,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@electric-sql/pglite-socket": "^0.2.11",
     "@playwright/test": "^1.63.0",
     "@shadcn/lint": "^0.1.0",
     "@tanstack/router-cli": "^1.132.0",
