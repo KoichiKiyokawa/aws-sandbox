@@ -5,7 +5,7 @@
 - `/assets/*`: 非公開 S3。CloudFront OAC のみ読み取り可能。Vite のハッシュ付きファイルを長期キャッシュ。
 - その他: Lambda Function URL。SSR・API をキャッシュせず、Cookie・クエリ・Authorization を転送。Host は Lambda のドメインに置換。
 - Lambda は Function URL に直接アクセスすることも可能です。アプリ認証は未実装です。Lambda OAC は POST/PUT にリクエスト本文の SHA256 を要求するため、この構成では使用しません。
-- DSQL 接続先・IAM 権限を Lambda に設定します。アプリは Drizzle と IAM トークン認証で接続します。初回デプロイ時は、ローカルの app/ から対象クラスターの DSQL_HOST と AWS 認証を設定して `mise exec -- pnpm db:setup` を実行し、TODO テーブルを作成してください。汎用マイグレーターは含みません。sandbox 用に対象クラスターの DbConnectAdmin を許可します。
+- DSQL 接続先・IAM 権限を Lambda に設定します。アプリは Drizzle と IAM トークン認証で接続します。初回デプロイ時は、ローカルの app/ から対象クラスターの DSQL_HOST と AWS 認証を設定して `mise run db:setup` を実行し、TODO テーブルを作成してください。汎用マイグレーターは含みません。sandbox 用に対象クラスターの DbConnectAdmin を許可します。
 
 ## 初回
 
@@ -15,20 +15,20 @@
 ```sh
 mise trust
 mise install
-(cd app && mise exec -- pnpm install --frozen-lockfile && mise exec -- pnpm build:lambda && mise exec -- pnpm test:lambda)
-mise exec -- terraform -chdir=terraform init
-mise exec -- terraform -chdir=terraform plan
-mise exec -- terraform -chdir=terraform apply
-mise exec -- bash scripts/deploy.sh
+mise run app:build
+mise run tf:init
+mise run tf:plan
+mise run tf:apply
+mise run app:deploy
 ```
 
-最後に CloudFront URL を表示します。初回はデプロイスクリプトで S3 にファイルを配置するまでブラウザー用 JS を取得できません。
+最後に CloudFront URL を表示します。初回はデプロイタスクで S3 にファイルを配置するまでブラウザー用 JS を取得できません。
 設定変更は `terraform.example.tfvars` を `terraform.tfvars` にコピーして行えます。
 
 ## アプリ更新
 
 ```sh
-mise exec -- bash scripts/deploy.sh
+mise run app:deploy
 ```
 
 Terraform はリソース構成を管理し、初回以降の Lambda コードは CLI が更新します。
@@ -40,12 +40,10 @@ SSR はキャッシュせず、アセット URL は内容で変わるため、�
 ## 検証
 
 ```sh
-mise exec -- terraform -chdir=terraform fmt -check
-mise exec -- terraform -chdir=terraform validate
-mise exec -- terraform -chdir=terraform test
+mise run tf:check
 ```
 
-テストでは AWS provider をモックし、AWS リソースは作成しません。実際の ZIP 作成には `mise exec -- pnpm build:lambda` の成果物が必要です。
+テストでは AWS provider をモックし、AWS リソースは作成しません。実際の ZIP 作成には `mise run app:build` の成果物が必要です。
 実 AWS への apply、CloudFront 経由の動作、DSQL 接続は別途実機検証が必要です。
 state はローカルです。複数人で運用する際は共有 backend を設定してください。
 
