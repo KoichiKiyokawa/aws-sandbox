@@ -1,7 +1,7 @@
 [tools]
 node = "22.23.2"
 pnpm = "12.5.1"
-terraform = "1.14.0"
+terraform = "1.16.3"
 awscli = "2.36.49"
 
 # 日常操作は mise run <タスク名>。一覧は mise tasks。
