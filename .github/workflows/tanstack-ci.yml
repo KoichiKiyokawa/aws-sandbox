@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
         with:
-          version: '2026.9.11'
+          version: '2026.9.14'
           working_directory: tanstack-start-lambda-dsql
       - name: Locate pnpm store
         id: pnpm-store
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3
         with:
-          version: '2026.9.11'
+          version: '2026.9.14'
           working_directory: tanstack-start-lambda-dsql
       - name: Locate pnpm store
         id: pnpm-store

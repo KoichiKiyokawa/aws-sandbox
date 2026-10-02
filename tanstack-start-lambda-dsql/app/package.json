@@ -48,7 +48,7 @@
   "devDependencies": {
     "@electric-sql/pglite-socket": "^0.2.11",
     "@playwright/test": "^1.63.0",
-    "@shadcn/lint": "^0.1.0",
+    "@shadcn/lint": "^0.2.0",
     "@tanstack/router-cli": "^1.132.0",
     "@types/node": "^22.10.2",
     "@types/pg": "^8.23.1",
@@ -56,7 +56,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "drizzle-kit": "^0.31.10",
-    "oxfmt": "^0.68.0",
+    "oxfmt": "^0.70.0",
     "oxlint": "^1.83.0",
     "tsx": "^4.23.13",
     "typescript": "^6.0.2",
